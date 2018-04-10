@@ -1,0 +1,33 @@
+
+public class A3Part1 {
+
+	public static void main(String[] args) {
+		//A TM for alphabet {a,b} that recognizes the language consisting of all words that contain the substring bbb
+		//Test your program with the following input strings:
+			//abba,  abbba,  bbababb,  babbbb,  aaabbb
+
+		String[] C  =
+		      {"0,a=>a,R,3",
+		       "0,b=>b,R,1",
+		       "1,b=>b,R,2",
+		       "1,a=>a,R,0",
+		       "2,b=>b,R,4",
+		       "2,a=>a,R,0",
+		       "3,a=>a,R,3",
+		       "3,b=>b,R,1",
+		       };
+		    char[] ST = {'R','R','R','R','H'};
+
+		 
+
+		    String inString;
+		    boolean accept1;
+		    TM TM1 = new TM(C, ST);
+		    //if(args.length >= 1){
+		      // Input string is command line parameter
+		      inString = "aba";
+		      // Process input string
+		      accept1 = TM1.ProcessData(inString);
+		      System.out.println("\n Valid string?   " + accept1);
+		  }// end main
+}

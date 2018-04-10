@@ -1,0 +1,87 @@
+
+//                      Samuel Reeder
+//                     	CS 4110 - 10:00 am
+//                      Assignment 3
+//                      Dr. Rague
+//                      Due: 04/10/2018
+//                      Version: 1.0
+
+// -----------------------------------------------------------------
+//This program simulates a Turing Machine. When it is created a user must
+//provide a set of instructions and a definition of state types. The user
+//must then pass a test string to the process data method and will get a true or
+//false based on the instructions and states they provided.
+// -----------------------------------------------------------------
+public class TM {
+
+	//instance Variables
+	String[]	Code;		//state transition function as code
+	char[]		StateType;	//=H for halt state and R for possible reject
+	String		Tape;		//read/write tape input data
+	int			tapePos;	//tape head position
+	int			cstate;		//current state
+	
+	// ----------------------------------------------------------
+	//The TM constructor assigns the Tape, sets the tape head position
+	//sets the current state 
+	// Version 1.1
+	// ----------------------------------------------------------
+	TM(String[] c, char[] ST)
+	{
+		Code = c;
+		StateType = ST;
+		Tape ="#";
+		cstate = 0;
+		tapePos = 0;
+	}
+	
+	// ----------------------------------------------------------
+	//This method returns the value of the cstate variable  
+	// Version 1.1
+	// ----------------------------------------------------------
+	public int GetState()
+	{
+		return tapePos;
+	}
+	
+	// ----------------------------------------------------------
+	//this method sets the 
+	// Version 1.1
+	// ----------------------------------------------------------
+	public void SetState(int stateIndex)
+	{
+		StateType[stateIndex] = 'c';
+	}
+	// ----------------------------------------------------------
+	//this method sets the value of the Tape variable. This value
+	//should be obtained via the console.
+	// Version 1.1
+	// ----------------------------------------------------------
+	public void SetTape(String userIn)
+	{
+		Tape += userIn +"#";
+	}
+	// ----------------------------------------------------------
+	//This method accepts a string from the user and the relies on
+	//other class methods to test the string to see if it is accepted
+	//into the language the user defined when the TM is constructed.
+	// Version 1.1
+	// ----------------------------------------------------------
+	public boolean ProcessData(String userIn)
+	{
+		Tape += userIn+"#"; // set the tape to the users input with # on each side.
+		while(StateType[cstate] == 'R')
+		{
+			//call StateTransistion()
+		}
+		
+		if(StateType[cstate] == 'H')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}//end ProcessData
+}
