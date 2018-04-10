@@ -44,7 +44,7 @@ public class A3Part2 {
 	    TM TM1 = new TM(C, ST);
 	    //if(args.length >= 1){
 	       //Input string is command line parameter
-	      inString = "bbaaaa";
+	      inString = "bbbaa";
 	      // Process input string
 	      accept1 = TM1.ProcessData(inString);
 	      System.out.println("\n Valid string?   " + accept1);
