@@ -89,9 +89,11 @@ public class TM {
 	private void StateTransition(char tapeVal)
 	{
 		boolean crash = false;
+		int codeTrack = 0;
 		for(int i = 0; i<Code.length;i++)
 		{
 			// instruction format 0,a=>A,R,1
+			codeTrack++;
 			char instChar = Code[i].charAt(0);				//get the state from the instruction
 			int temp = Character.getNumericValue(instChar); //convert it to an int for comparison
 			
@@ -134,6 +136,14 @@ public class TM {
 					break;
 				}
 			}
+		}
+		if(codeTrack == Code.length)
+		{
+			crash = true;
+		}
+		if(crash == false)
+		{
+			codeTrack =0;
 		}
 		if(crash == true) //if no instruction is found that matches the state and the tape value the machine crashes
 		{

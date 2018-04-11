@@ -1,0 +1,150 @@
+//                      Samuel Reeder
+//                     	CS 4110 - 10:00 am
+//                      Assignment 3
+//                      Dr. Rague
+//                      Due: 04/10/2018
+//                      Version: 1.0
+
+// -----------------------------------------------------------------
+//This program simulates a Turing Machine. When it is created a user must
+//provide a set of instructions and a definition of state types. The user
+//must then pass a test string to the process data method and will get a true or
+//false based on the instructions and states they provided.
+// -----------------------------------------------------------------
+public class TM {
+
+	//instance Variables
+	String[]	Code;		//state transition function as code
+	char[]		StateType;	//=H for halt state and R for possible reject
+	String		Tape;		//read/write tape input data
+	int			tapePos;	//tape head position
+	int			cstate;		//current state
+	
+	// ----------------------------------------------------------
+	//The TM constructor assigns the Tape, sets the tape head position
+	//sets the current state 
+	// Version 1.1
+	// ----------------------------------------------------------
+	TM(String[] c, char[] ST)
+	{
+		Code = c;
+		StateType = ST;
+		Tape ="#";
+		cstate = 0;
+		tapePos = 0;
+	}
+	
+	// ----------------------------------------------------------
+	//This method returns the value of the cstate variable  
+	// Version 1.1
+	// ----------------------------------------------------------
+	public int GetState()
+	{
+		return tapePos;
+	}
+	
+	// ----------------------------------------------------------
+	//this method sets the 
+	// Version 1.1
+	// ----------------------------------------------------------
+	public void SetState(int stateIndex)
+	{
+		StateType[stateIndex] = 'c';
+	}
+	// ----------------------------------------------------------
+	//this method sets the value of the Tape variable. This value
+	//should be obtained via the console.
+	// Version 1.1
+	// ----------------------------------------------------------
+	public void SetTape(String userIn)
+	{
+		Tape += userIn +"#";
+	}
+	// ----------------------------------------------------------
+	//This method accepts a string from the user and the relies on
+	//other class methods to test the string to see if it is accepted
+	//into the language the user defined when the TM is constructed.
+	// Version 1.1
+	// ----------------------------------------------------------
+	public boolean ProcessData(String userIn)
+	{
+		Tape += userIn+"#"; // set the tape to the users input with # on each side.
+		tapePos++;
+		while(StateType[cstate] == 'R')
+		{
+			char tapeChar = Tape.charAt(tapePos);
+			StateTransition(tapeChar);
+		}
+		
+		if(StateType[cstate] == 'H')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}//end ProcessData
+	
+	private void StateTransition(char tapeVal)
+	{
+		boolean crash = false;
+		for(int i = 0; i<Code.length;i++)
+		{
+			// instruction format 0,a=>A,R,1
+			char instChar = Code[i].charAt(0);				//get the state from the instruction
+			int temp = Character.getNumericValue(instChar); //convert it to an int for comparison
+			
+			if(temp == cstate)//if the instruction state matches the current state we will test the tape value against the instruction
+			{
+				char readVal = Code[i].charAt(2);
+				if(tapeVal == readVal)//if the tape value and the instruction read value are the same we will execute the instruction
+				{
+					//parsing instruction
+					String toPrint = Code[i].substring(5, 6);
+					String direction = Code[i].substring(7, 8);
+					String nextState = Code[i].substring(9);
+					//Separating out the tape in preparation for the new value write
+					String tempTapeFront = Tape.substring(0, tapePos);
+					String tempTapeBack = Tape.substring(tapePos+1);
+					//build a new tape that has the post execution value in it
+					StringBuffer tempTape = new StringBuffer(tempTapeFront);
+					tempTape.append(toPrint);
+					tempTape.append(tempTapeBack);
+					Tape = new String(tempTape);
+					//move the tape position and current state
+					if(direction.equals("R"))
+					{
+						tapePos++;
+					}
+					else
+					{
+						tapePos--;
+					}
+					if(tapePos<0) //check to see if tape head has moved to the left of the start state
+					{
+						StateType[cstate] = 'C';
+						break;
+					}
+					if(i == Code.length-1)
+					{
+						crash = true;
+					}
+					cstate = Integer.parseInt(nextState);
+					break;
+				}
+				if(i == Code.length-1)
+				{
+					crash = true;
+					break;
+				}
+				//cstate = Integer.parseInt(nextState);
+				//break;
+			}
+		}
+		if(crash == true) //if no instruction is found that matches the state and the tape value the machine crashes
+		{
+			StateType[cstate] = 'C';
+		}
+	}
+}
