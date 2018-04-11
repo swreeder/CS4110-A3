@@ -4,7 +4,6 @@
 //                      Dr. Rague
 //                      Due: 04/10/2018
 //                      Version: 1.0
-
 // -----------------------------------------------------------------
 //This program makes us of the TM class to test strings provided from 
 //the command line to see if they fit into the language defined as follows:

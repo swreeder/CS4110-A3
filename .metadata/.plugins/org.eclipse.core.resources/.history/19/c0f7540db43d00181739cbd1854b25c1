@@ -1,5 +1,5 @@
 //                      Samuel Reeder
-//                     	CS 4110 - 10:01 pm
+//                     	CS 4110 - 10:35 pm
 //                      Assignment 3
 //                      Dr. Rague
 //                      Due: 04/10/2018
@@ -7,36 +7,34 @@
 // -----------------------------------------------------------------
 //This program makes us of the TM class to test strings provided from 
 //the command line to see if they fit into the language defined as follows:
-//A TM for alphabet {x,y} that recognizes the language consisting of all odd-length palindromes.   
+//A TM for alphabet {p,q} that recognizes the language consisting of words 
+//having the form qNpNqN (N > 0, N is an integer)  
 // -----------------------------------------------------------------
-public class A3Part3 {
+public class A3part4 {
 
 	public static void main(String[] args)
 	  {
 	    // Language: strings in which the second letter is 
 	    String[] C  =
-		      {"0,x=>#,R,1",
-		       "0,y=>#,R,2",
-		       "1,y=>y,R,4",
-		       "1,x=>x,R,4",
-		       "1,#=>#,R,3",
-		       "2,#=>#,R,3",
-		       "2,x=>x,R,7",
-		       "2,y=>y,R,7",
-		       "4,x=>x,R,4",
+		      {"0,q=>x,R,1",
+		       "0,y=>y,R,4",
+		       "1,y=>y,R,1",
+		       "1,q=>q,R,1",
+		       "1,p=>y,R,2",
+		       "2,p=>p,R,2",
+		       "2,z=>z,R,2",
+		       "2,q=>z,L,3",
+		       "3,z=>z,L,3",
+		       "3,p=>p,L,3",
+		       "3,y=>y,L,3",
+		       "3,q=>q,L,3",
+		       "3,x=>x,R,0",
 		       "4,y=>y,R,4",
-		       "4,#=>#,L,5",
-		       "5,x=>#,L,6",
-		       "6,x=>x,L,6",
-		       "6,y=>y,L,6",
-		       "6,#=>#,R,0",
-		       "7,x=>x,R,7",
-		       "7,y=>y,R,7",
-		       "7,#=>#,L,8",
-		       "8,y=>#,L,6",
-		       "3,#=>3,R,3"};
+		       "4,z=>z,R,4",
+		       "4,#=>#,R,5",
+		       "5,#=>#,R,5"};
 		
-	    char[] ST = {'R','R','R','H','R','R','R','R','R'};
+	    char[] ST = {'R','R','R','R','R','H'};
 
 	 
 
@@ -45,6 +43,7 @@ public class A3Part3 {
 	    TM TM1 = new TM(C, ST);
 	    if(args.length >= 1){
 	       //Input string is command line parameter
+	      //inString = "qqppqqq";
 	    	inString = args[0];
 	      // Process input string
 	      accept1 = TM1.ProcessData(inString);

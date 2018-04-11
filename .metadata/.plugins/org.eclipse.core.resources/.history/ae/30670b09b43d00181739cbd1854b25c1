@@ -45,6 +45,7 @@ public class A3Part3 {
 	    TM TM1 = new TM(C, ST);
 	    if(args.length >= 1){
 	       //Input string is command line parameter
+	      //inString = "xyx";
 	    	inString = args[0];
 	      // Process input string
 	      accept1 = TM1.ProcessData(inString);

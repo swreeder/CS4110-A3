@@ -4,7 +4,6 @@
 //                      Dr. Rague
 //                      Due: 04/10/2018
 //                      Version: 1.0
-
 // -----------------------------------------------------------------
 //This program makes us of the TM class to test strings provided from 
 //the command line to see if they fit into the language defined as follows:
@@ -44,7 +43,6 @@ public class A3part4 {
 	    TM TM1 = new TM(C, ST);
 	    if(args.length >= 1){
 	       //Input string is command line parameter
-	      //inString = "qqppqqq";
 	    	inString = args[0];
 	      // Process input string
 	      accept1 = TM1.ProcessData(inString);
