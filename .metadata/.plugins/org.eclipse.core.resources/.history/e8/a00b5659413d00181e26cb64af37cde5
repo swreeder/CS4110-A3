@@ -1,0 +1,42 @@
+
+public class A3part4 {
+
+	public static void main(String[] args)
+	  {
+	    // Language: strings in which the second letter is 
+	    String[] C  =
+		      {"0,q=>x,R,1",
+		       "0,y=>y,R,4",
+		       "1,y=>y,R,1",
+		       "1,q=>q,R,1",
+		       "1,p=>y,R,2",
+		       "2,p=>p,R,2",
+		       "2,z=>z,R,2",
+		       "2,q=>z,L,3",
+		       "3,z=>z,L,3",
+		       "3,p=>p,L,3",
+		       "3,y=>y,L,3",
+		       "3,q=>q,L,3",
+		       "3,x=>x,R,0",
+		       "4,y=>y,R,4",
+		       "4,z=>z,R,4",
+		       "4,#=>#,R,5",
+		       "5,#=>#,R,5"};
+		
+	    char[] ST = {'R','R','R','R','R','H'};
+
+	 
+
+	    String inString;
+	    boolean accept1;
+	    TM TM1 = new TM(C, ST);
+	    //if(args.length >= 1){
+	       //Input string is command line parameter
+	      inString = "qqppq";
+	      // Process input string
+	      accept1 = TM1.ProcessData(inString);
+	      System.out.println("\n Valid string?   " + accept1);
+	    //}
+	  }// end main
+
+}
